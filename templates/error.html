@@ -1,0 +1,89 @@
+{{define "error"}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      rel="shortcut icon"
+      href="../static/images/icon.png"
+      type="image/x-icon"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../static/icon.png" type="image/x-icon" />
+    <title>{{.TextErr}}</title>
+  </head>
+  <style>
+    :root {
+      --firstcolor: #080321;
+      --secondcolor: #080321bd;
+      --textcolor: #4e2202;
+      --whitecolor: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      color: var(--textcolor);
+    }
+
+    .err {
+      top: 10vh;
+      height: 80vh;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn-home {
+      background-image: linear-gradient(
+        135deg,
+        var(--secondcolor) 10%,
+        var(--firstcolor) 100%
+      );
+      font-weight: bold;
+      margin-top: 10px;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    .btn-home:hover {
+      background-image: linear-gradient(
+        135deg,
+        var(--firstcolor) 10%,
+        var(--secondcolor) 100%
+      );
+    }
+
+    h1 {
+      font-size: 200px;
+    }
+  </style>
+
+  <body>
+    <div class="err">
+      <h1>{{.ErrNum}}</h1>
+      <p>{{.TextErr}}</p>
+      <li>
+        <a href="/">
+          <button class="btn-home">Home</button>
+        </a>
+      </li>
+    </div>
+  </body>
+</html>
+{{end}}

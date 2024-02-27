@@ -1,0 +1,92 @@
+{{define "viewArtist"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../static/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/viewArtists.css">
+    <title>{{.Artist.Name}} - Groupie Tracker</title>
+</head>
+
+<body>
+    {{template "header" .}}
+    <section>
+        <div class="parent">
+            <div class="container">
+
+                <div class="content">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="{{.Artist.Image}}" alt="Image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details">
+
+                    <div class="members">
+                    </div>
+                    <div class="creationdate">
+                        <div class="lists">
+                            <h2>Name: </h2>
+                            <div class="creationdate list">{{.Artist.Name}}</div>
+                        </div>
+                    </div>
+                    <div class="creationdate">
+                        <div class="lists">
+                            <h2>Creation Date: </h2>
+                            <div class="creationdate list">{{.Artist.CreationDate}}</div>
+                        </div>
+                    </div>
+                    <div class="firstalbum">
+                        <div class="lists">
+                            <h2>First Album: </h2>
+                            <div class="firstalbum list">{{.Artist.FirstAlbum}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2>Informations</h2>
+            <div class="concertdate">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Members</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{range .Artist.Members}}
+                        <tr>
+                            <td>{{.}}</td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Locations</th>
+                            <th>Dates</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{range $i, $location := .Artist.Locations}}
+                        <tr>
+                            <td>{{$location}}</td>
+                            <td>{{index $.Artist.ConcertDates $i}}</td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        </div>
+    </section>
+</body>
+
+</html>
+{{end}}

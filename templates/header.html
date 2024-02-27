@@ -1,0 +1,267 @@
+{{define "header"}}
+
+<head>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/home.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <a href="/" class="nav-logos"><img src="../static/images/logomusi.png" alt="logo" class="nav-logo"></a>
+
+            <!-- <div class="searchdiv"><input type="text" class="search" placeholder="Search.."><i class="fa fa-search"></i>
+            </div> -->
+            <ul class="nav-menu">
+                <form action="/search" method="post">
+                    <div class="searchdiv"> <input placeholder="Search..." list="browsers" class="search"
+                            name="browsers">
+                        <button><i class="fa fa-search"></i></button>
+                    </div>
+                    <datalist id="browsers">
+                        {{range .Artists}}
+                        <option value="{{.Name}} - Artists">
+                            <option value="{{.CreationDate}} - Creation date">
+                            {{range .Members}}
+                        <option value="{{.}} - Members">
+                            {{end}}
+                            {{end}}
+                            {{range .Locations}}
+                        <option value="{{.}} - Location">
+                            {{end}}
+                    </datalist>
+
+                </form>
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/artists" class="nav-link">Artists</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://learn.zone01dakar.sn/git/root/public/src/branch/master/subjects/groupie-tracker" class="nav-link"
+                        target="_blank">About</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </div>
+</header>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    :root {
+        --firstcolor: #080321;
+        --secondcolor: #080321bd;
+        --textcolor: #4e2202;
+        --whitecolor: #fff;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        color: var(--textcolor);
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+
+    header {
+        position: fixed;
+        top: 0px;
+        background-color: var(--firstcolor);
+        width: 100vw;
+        height: max-content;
+        display: flex;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .navbar .search {
+        padding: 10px;
+        border: 1px solid var(--whitecolor);
+        border-radius: 10px;
+    }
+
+    .navbar .search input[type="text"] {
+        padding: 5px;
+        border: none;
+        font-size: 14px;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    a {
+        color: var(--whitecolor);
+        text-decoration: none;
+    }
+
+    li {
+        list-style: none;
+    }
+
+
+    button {
+        background: var(--firstcolor);
+        border: 1px solid var(--whitecolor);
+        border-radius: 6px;
+    }
+
+    button:hover {
+        background: var(--whitecolor);
+    }
+
+
+    .navbar {
+        padding: 6px;
+        width: 100vw;
+        min-height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-logo {
+        padding: 15px;
+        width: 150px;
+        overflow: hidden;
+    }
+
+    .nav-logos {
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .nav-menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .nav-link {
+        margin: 0;
+        padding: 10px;
+        font-weight: 600;
+        border-radius: 6px;
+        transition: 0.3s ease-out;
+        color: var(--whitecolor);
+    }
+
+    .nav-link:hover {
+        color: var(--textcolor);
+        background: var(--whitecolor);
+    }
+
+    .hamburger {
+        display: none;
+        cursor: pointer;
+    }
+
+    .bar {
+        background: #000;
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        background-color: var(--whitecolor);
+    }
+
+
+
+    .menu {
+        display: flex;
+        gap: 1em;
+        font-size: 18px;
+    }
+
+
+    .menu li {
+        padding: 5px 14px;
+    }
+
+    .fa-search {
+        cursor: pointer;
+        color: var(--whitecolor);
+        padding: 13px;
+        border-radius: 6px;
+    }
+
+    .fa-search:hover {
+        transform: all 2s ease;
+        padding: 13px;
+        color: var(--firstcolor);
+        background: var(--whitecolor);
+
+    }
+
+    /*
+
+    */
+    @media(max-width:900px) {
+        .hamburger {
+            display: block;
+        }
+
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .nav-menu {
+            position: fixed;
+            right: -100%;
+            top: 70px;
+            gap: 0;
+            flex-direction: column;
+            background-color: var(--firstcolor);
+            width: 100%;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .nav-item {
+            margin: 16px 0;
+        }
+
+        .nav-menu.active {
+            z-index: 1000;
+            right: 0;
+        }
+    }
+</style>
+<script>
+    // Fonction pour rendre la barre de navigation responsive
+    const icon = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-menu");
+
+    icon.addEventListener("click", () => {
+        icon.classList.toggle("active");
+        navMenu.classList.toggle("active");
+    })
+
+    document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+        icon.classList.remove("active");
+        navMenu.classList.remove("active");
+    }))
+
+</script>
+{{end}}

@@ -1,0 +1,37 @@
+{{define "index"}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/main.css" />
+    <link
+      rel="shortcut icon"
+      href="../static/images/icon.png"
+      type="image/x-icon"
+    />
+    <title>Groupie Tracker</title>
+  </head>
+
+  <body>
+    {{template "header" .}}
+    <div class="content">
+      <div class="text">
+        <div class="text-h1">
+          <h1>Find <span>the rhythm</span> you love</h1>
+        </div>
+        <div class="text-h2">
+          <div class="btn-h2">
+            <h2>
+              Discover more artists <a href="/artists"> <span>Here</span></a>
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="images">
+        <img class="image" src="../static/images/music.svg" alt="" srcset="" />
+      </div>
+    </div>
+  </body>
+</html>
+{{end}}

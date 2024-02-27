@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --firstcolor: #080321;
+    --secondcolor: #080321bd;
+    --textcolor: #4e2202;
+    --whitecolor: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    color: var(--textcolor);
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+body {
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
+
+section {
+    top: 10vh;
+    position: absolute;
+    height: 80vh;
+}
+
+section .container {
+    height: 100%;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+section .container .content {
+    width: 47vw;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+}
+
+.name {
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.card .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    z-index: 100;
+}
+
+section .card .image {
+    height: 40vw;
+    width: 40vw;
+    max-width: 350px;
+    max-height: 350px;
+    border-radius: 40% 50% 40% 50%;
+    padding: 3px;
+    background: var(--firstcolor);
+}
+
+section .card .image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 40% 50% 40% 50%;
+    border: 3px solid #fff;
+}
+
+h2 {
+    font-weight: 600;
+    padding: 6px;
+    font-size: 30px;
+    width: fit-content;
+    margin-left: 20px;
+}
+
+.details {
+    display: flex;
+    width: 47vw;
+    margin: 100px auto;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+}
+
+.lists {
+    display: flex;
+    width: 47vw;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-left: 15px;
+}
+
+.list {
+    margin: 7px 10px;
+    width: fit-content;
+    height: fit-content;
+    color: #fff;
+    font-weight: 600;
+    font-size: 25px;
+    background-color: var(--firstcolor);
+    padding: 2px 20px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.parent {
+    width: 100vw;
+    /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.concertdate {
+    width: 80vw;
+    height: 40vh;
+    display: flex;
+    /* overflow: scroll; */
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+th {
+    color: #fff;
+
+}
+
+table {
+    border-collapse: collapse;
+    margin: 25px;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+table thead tr {
+    background-color: var(--firstcolor);
+    color: #ffffff;
+    text-align: left;
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+table tbody tr:nth-of-type(even) {
+    background-color: #f2f2f2;
+}
+
+table tbody tr:last-of-type {
+    border-bottom: 2px solid var(--firstcolor);
+}
+
+@media screen and (max-width: 570px) {
+    table {
+        min-width: 300px;
+        overflow: hidden;
+    }
+}

@@ -1,0 +1,266 @@
+{{define "artists"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../static/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Artists</title>
+</head>
+
+<body class="body">
+    <section>
+        {{range .Artists}}
+        <div class="container">
+            <div class="content">
+                <div class="card">
+                    <div class="card-content">
+                        <a href="/artists/{{.ID}}" class="link">
+                            <div class="image">
+                                <img src="{{.Image}}" alt="Image">
+                            </div>
+                            <div class="name">{{.Name}}</div>
+                            <div class="details">
+                                <div class=" creationdate">
+                                    Creation Date {{.CreationDate}}
+                                </div>
+                                <div class="firstalbum">
+                                    First Album {{.FirstAlbum}}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{end}}
+    </section>
+    <div class="pt">
+        <div class="filter__container">
+            <form action="/filters" method="POST">
+                <div class="wrapper">
+                    <h2>Creation Date</h2>
+
+                    <div class="price-input">
+                        <div class="field">
+                            <span>From:</span>
+                            <span class="f" id="range1">1958</span>
+                        </div>
+                        <div class="field">
+                            <span>To:</span>
+                            <span class="f" id="range2">2015</span>
+                        </div>
+                    </div>
+
+                    <div class="container-range">
+                        <div class="slider-track create_date-track"></div>
+                        <input type="range" name="MinCreationDate" min="1958" max="2015" value="1958" id="slider-1"
+                            oninput="slideOne()">
+                        <input type="range" name="MaxCreationDate" min="1958" max="2015" value="2015" id="slider-2"
+                            oninput="slideTwo()">
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <h2>First Album Date</h2>
+
+                    <div class="price-input">
+                        <div class="field">
+                            <span>From:</span>
+                            <span class="f" id="range3">1963</span>
+                        </div>
+                        <div class="field">
+                            <span>To:</span>
+                            <span class="f" id="range4">2018</span>
+                        </div>
+                    </div>
+
+                    <div class="container-range">
+                        <div class="slider-track first_album-track"></div>
+                        <input type="range" name="MinFirstAlbumDate" min="1963" max="2018" value="1963" id="slider-3"
+                            oninput="slideThree()">
+                        <input type="range" name="MaxFirstAlbumDate" min="1963" max="2018" value="2018" id="slider-4"
+                            oninput="slideFour()">
+                    </div>
+                </div>
+
+                <div class="members wrapper">
+                    <h2>Members</h2>
+                    <div class="members__items">
+                        <input type="checkbox" id="1" name="Member1">
+                        <label for="1">
+                            <span>1</span>
+                        </label>
+                        <input type="checkbox" id="2" name="Member2">
+                        <label for="2">
+                            <span>2</span>
+                        </label>
+                        <input type="checkbox" id="3" name="Member3">
+                        <label for="3">
+                            <span>3</span>
+                        </label>
+                        <input type="checkbox" id="4" name="Member4">
+                        <label for="4">
+                            <span>4</span>
+                        </label>
+                        <input type="checkbox" id="5" name="Member5">
+                        <label for="5">
+                            <span>5</span>
+                        </label>
+                        <input type="checkbox" id="6" name="Member6">
+                        <label for="6">
+                            <span>6</span>
+                        </label>
+                        <input type="checkbox" id="7" name="Member7">
+                        <label for="7">
+                            <span>7</span>
+                        </label>
+                        <input type="checkbox" id="8" name="Member8">
+                        <label for="8">
+                            <span>8</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="wrapper location">
+                    <h2>Location</h2>
+                    <div class="search dark">
+                        <div class="form__search">
+                            <input class="tags" type="search" name="loc" list="browsersLoc"  placeholder="Add...">
+                        </div>
+
+                        <datalist id="browsersLoc">
+                                {{range .Locations}}
+                            <option value="{{.}}">
+                                {{end}}
+                        </datalist>
+
+                        <div class="content">
+                            <ul class="ul"></ul>
+                        </div>
+                    </div>
+                </div>
+                <button class="submit" type="submit">APPLY</button>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        document.body.classList.add('loaded_hiding');
+        window.setTimeout(function () {
+            document.body.classList.add('loaded');
+            document.body.classList.remove('loaded_hiding');
+        }, 500);
+
+        slideOne();
+        slideTwo();
+        slideThree();
+        slideFour();
+    }
+
+    let sliderOne = document.getElementById("slider-1");
+    let sliderTwo = document.getElementById("slider-2");
+    let displayValOne = document.getElementById("range1");
+    let displayValTwo = document.getElementById("range2");
+    let minGap = 0;
+    let sliderTrack = document.querySelector(".create_date-track");
+    let sliderMaxValue = parseInt(sliderOne.max);
+
+    function slideOne() {
+        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+            sliderOne.value = parseInt(sliderTwo.value) - minGap;
+        }
+        displayValOne.textContent = sliderOne.value;
+        fillColor();
+    }
+    function slideTwo() {
+        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+            sliderTwo.value = parseInt(sliderOne.value) + minGap;
+        }
+        displayValTwo.textContent = sliderTwo.value;
+        fillColor();
+    }
+    function fillColor() {
+        const range = sliderMaxValue - parseInt(sliderOne.min);
+        const percent1 = ((sliderOne.value - parseInt(sliderOne.min)) / range) * 100;
+        const percent2 = ((sliderTwo.value - parseInt(sliderOne.min)) / range) * 100;
+        sliderTrack.style.background = `linear-gradient(to right, #dadae5 ${percent1}%, #272b33 ${percent1}%, #272b33 ${percent2}%, #dadae5 ${percent2}%)`;
+    }
+
+
+    // ------------------------------------------------------------------------------------
+
+    let sliderThree = document.getElementById("slider-3");
+    let sliderFour = document.getElementById("slider-4");
+    let displayValThree = document.getElementById("range3");
+    let displayValFour = document.getElementById("range4");
+    let minGapAlbum = 0;
+    let sliderTrackAlbum = document.querySelector(".first_album-track");
+    let sliderMaxValueAlbum = document.getElementById("slider-3").max;
+
+    function slideThree() {
+        if (parseInt(sliderFour.value) - parseInt(sliderThree.value) <= minGapAlbum) {
+            sliderThree.value = parseInt(sliderFour.value) - minGapAlbum;
+        }
+        displayValThree.textContent = sliderThree.value;
+        fillColorAlbum();
+    }
+    function slideFour() {
+        if (parseInt(sliderFour.value) - parseInt(sliderThree.value) <= minGapAlbum) {
+            sliderFour.value = parseInt(sliderThree.value) + minGapAlbum;
+        }
+        displayValFour.textContent = sliderFour.value;
+        fillColorAlbum();
+    }
+    function fillColorAlbum() {
+        const range = sliderMaxValueAlbum - parseInt(sliderThree.min);
+        const percent1 = ((sliderThree.value - parseInt(sliderThree.min)) / range) * 100;
+        const percent2 = ((sliderFour.value - parseInt(sliderThree.min)) / range) * 100;
+        sliderTrackAlbum.style.background = `linear-gradient(to right, #dadae5 ${percent1}%, #272b33 ${percent1}%, #272b33 ${percent2}%, #dadae5 ${percent2}%)`;
+    }
+    // ------------------------------------------------------------------------------------
+    const ul = document.querySelector(".ul");
+    const input = document.querySelector(".tags");
+    const tagNumb = document.querySelector(".details span");
+
+    // let maxTags = 10;
+    let tags = [];
+
+    countTags();
+    createTag();
+
+    function countTags() {
+        input.focus();
+        tagNumb.innerText = tags.length;
+    }
+
+    function createTag() {
+        ul.querySelectorAll("li").forEach((li) => li.remove());
+        tags.slice().reverse().forEach((tag) => {
+            let liTag = `<li>${tag} <input type="checkbox" checked value="${tag}" name="locations" readonly> <i class="uit uit-multiply" onclick="remove(this, '${tag}')"><svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.99997 8H6.5M6.5 8V18C6.5 19.1046 7.39543 20 8.5 20H15.5C16.6046 20 17.5 19.1046 17.5 18V8M6.5 8H17.5M17.5 8H19M9 5H15M9.99997 11.5V16.5M14 11.5V16.5" stroke="#464455" stroke-linecap="round" stroke-linejoin="round"/></svg></i></li>`;
+            ul.insertAdjacentHTML("afterbegin", liTag);
+        });
+        countTags();
+    }
+
+    function remove(element, tag) {
+        let index = tags.indexOf(tag);
+        tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
+        element.parentElement.remove();
+        countTags();
+    }
+
+    const removeBtn = document.querySelector(".details button");
+    removeBtn.addEventListener("click", () => {
+        tags.length = 0;
+        ul.querySelectorAll("li").forEach((li) => li.remove());
+        countTags();
+    });
+
+    const addButton = document.querySelector(".form__search button");
+    addButton.addEventListener("click", addTagByButton);
+</script>
+
+</html>
+{{end}}
